@@ -1,191 +1,370 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portafolio | BatiProfe</title>
-  <style>
-    :root {
-      --bg-color: #0d1117;
-      --card-bg: #161b22;
-      --border-color: #30363d;
-      --text-main: #c9d1d9;
-      --text-heading: #f0f6fc;
-      --accent-color: #58a6ff;
-      --accent-hover: #1f6feb;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portafolio · Tu Nombre</title>
+<meta name="description" content="Proyectos, ideas y prácticas de programación y diseño de un docente de informática.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F7FAFF;--grid:#DDE7F6;--ink:#1E2A4A;--muted:#55607D;--line:#C9D6EC;
+  --coral:#FF5D73;--yellow:#FFE45E;--teal:#19B5A5;--violet:#7B61FF;
+  --display:"Fredoka",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font:400 1.08rem/1.6 var(--display);
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--violet);outline-offset:3px}
+.wrap{max-width:1140px;margin:0 auto;padding:0 22px}
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.top strong{font:600 1.15rem var(--display)}
+.top nav{display:flex;gap:22px}
+.top nav a{font-weight:600;text-decoration:none}
+.top nav a:hover{text-decoration:underline;text-decoration-thickness:3px;text-decoration-color:var(--coral);text-underline-offset:5px}
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      line-height: 1.6;
-      padding: 2rem 1rem;
-    }
+/* Hero */
+.hero{display:grid;gap:44px;align-items:center;padding:24px 0 70px}
+@media (min-width:960px){.hero{grid-template-columns:5fr 6fr}}
+.role{display:inline-block;background:var(--yellow);border:2px solid var(--ink);border-radius:10px;padding:3px 14px;font-weight:600;transform:rotate(-2deg);margin-bottom:18px}
+.hero h1{font:600 clamp(2.3rem,5.4vw,4rem)/1.05 var(--display);margin:0 0 18px}
+.hero p{max-width:46ch;font-size:1.2rem;margin:0 0 28px}
+.go{display:inline-block;text-decoration:none;font-weight:600;background:var(--coral);color:#fff;padding:13px 26px;border-radius:12px;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.go:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
+/* Ventana de código */
+.win{background:var(--ink);border:3px solid var(--ink);border-radius:14px;box-shadow:9px 9px 0 var(--violet);overflow:hidden}
+.bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#2A3963;color:#C9D6EC;font:400 .85rem var(--mono)}
+.bar i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.bar i:nth-child(1){background:#FF5D73}.bar i:nth-child(2){background:#FFE45E}.bar i:nth-child(3){background:#19B5A5}
+.bar span{margin-left:8px;flex:1}
+.run{font:700 .85rem var(--mono);background:var(--teal);color:#fff;border:0;border-radius:8px;padding:5px 12px;cursor:pointer}
+.panes{display:grid;grid-template-columns:1fr}
+@media (min-width:560px){.panes{grid-template-columns:1.15fr 1fr}}
+#code{margin:0;padding:18px;font:400 .95rem/1.7 var(--mono);color:#E8EEFB;min-height:220px;white-space:pre-wrap}
+#code .k{color:#FF8CA0}#code .s{color:#7BE0D2}#code .v{color:#FFE45E}#code .f{color:#B3A4FF}
+.prev{background:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:20px 20px;border-left:3px solid var(--ink)}
+.prev svg{display:block;width:100%;height:100%;min-height:220px}
+.shape{opacity:0;transform:scale(.2);transform-origin:center;transform-box:fill-box;transition:opacity .3s,transform .4s cubic-bezier(.3,1.6,.5,1)}
+.shape.on{opacity:1;transform:none}
 
-    header {
-      text-align: center;
-      margin-bottom: 3rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--border-color);
-    }
+/* Proyectos */
+.explore{padding:30px 0 40px}
+.head{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;margin-bottom:24px}
+.explore h2{font:600 clamp(1.9rem,4vw,2.7rem)/1.1 var(--display);margin:0}
+.tip{max-width:300px;background:var(--yellow);border:2px solid var(--ink);border-radius:6px;padding:10px 16px;font-size:.98rem;transform:rotate(2deg);box-shadow:3px 3px 0 var(--ink)}
+.tip b{font-weight:600}
+.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:34px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tab{font:600 .98rem var(--display);color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:10px;padding:6px 16px;cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--ink);color:#fff}
+.controls input{margin-left:auto;font:inherit;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:10px;padding:8px 16px;min-width:220px;flex:0 1 280px}
+.empty{color:var(--muted)}
+.notice{margin:0 0 26px;padding:12px 16px;background:#fff;border:2px dashed var(--ink);border-radius:10px;font-size:.98rem}
+.notice code{font-family:var(--mono);font-size:.9em;background:var(--yellow);padding:0 5px;border-radius:4px}
 
-    header h1 {
-      font-size: 2.5rem;
-      color: var(--text-heading);
-      margin-bottom: 0.5rem;
-    }
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:36px 30px}
+.card{text-align:left;font:inherit;color:inherit;background:#fff;border:3px solid var(--ink);border-radius:14px;padding:0;cursor:pointer;overflow:hidden;box-shadow:6px 6px 0 var(--ink);transition:transform .15s,box-shadow .15s;display:flex;flex-direction:column}
+.card:nth-child(odd){transform:rotate(-.7deg)}
+.card:nth-child(even){transform:rotate(.6deg)}
+.card:hover{transform:rotate(0) translateY(-5px);box-shadow:6px 11px 0 var(--ink)}
+.card .bar{background:#EEF3FC;color:var(--ink);border-bottom:3px solid var(--ink)}
+.card .bar span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.art{aspect-ratio:16/10;overflow:hidden;border-bottom:3px solid var(--ink);background:var(--paper)}
+.art svg{display:block;width:100%;height:100%}
+.info{padding:16px 18px 18px}
+.badge{display:inline-block;font-weight:600;font-size:.85rem;border:2px solid var(--ink);border-radius:8px;padding:0 10px;margin-bottom:8px}
+.badge.pub{background:var(--teal);color:#fff}
+.badge.wip{background:var(--yellow)}
+.badge.idea{background:#fff;border-style:dashed}
+.info h3{font:600 1.35rem/1.2 var(--display);margin:0 0 6px;word-break:break-word}
+.info p{margin:0 0 12px;color:var(--muted);font-size:1rem}
+.meta{display:flex;gap:14px;align-items:center;font-size:.92rem}
+.dot{width:12px;height:12px;border-radius:50%;border:2px solid var(--ink);display:inline-block;margin-right:6px;vertical-align:-1px}
 
-    header p {
-      font-size: 1.1rem;
-      color: #8b949e;
-    }
+/* Detalle */
+dialog{margin:0 0 0 auto;height:100%;max-height:none;width:min(480px,100%);border:0;border-left:3px solid var(--ink);background:#fff;color:var(--ink);padding:0;overflow:auto}
+dialog::backdrop{background:rgba(30,42,74,.55)}
+dialog[open]{animation:slide .25s ease-out}
+@keyframes slide{from{transform:translateX(40px);opacity:0}}
+dialog .bar{background:#EEF3FC;color:var(--ink);border-bottom:3px solid var(--ink)}
+dialog .art{aspect-ratio:16/9}
+dialog .body{padding:20px 26px 30px}
+dialog h3{font:600 1.8rem/1.1 var(--display);margin:0 0 12px;word-break:break-word}
+.close{font:600 .85rem var(--display);background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:8px;padding:3px 12px;cursor:pointer}
+.topics{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px;padding:0;list-style:none}
+.topics li{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:0 10px;font:400 .85rem var(--mono)}
+dl{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;margin:0 0 24px;color:var(--muted)}
+dd{margin:0;color:var(--ink);font-weight:600}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{text-decoration:none;font-weight:600;padding:10px 20px;border-radius:10px;border:2px solid var(--ink)}
+.btn.primary{background:var(--coral);color:#fff;box-shadow:3px 3px 0 var(--ink)}
 
-    .section-title {
-      font-size: 1.5rem;
-      color: var(--text-heading);
-      margin-bottom: 1.5rem;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .card {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      border-color: var(--accent-color);
-    }
-
-    .card h3 {
-      font-size: 1.25rem;
-      color: var(--text-heading);
-      margin-bottom: 0.5rem;
-    }
-
-    .card p {
-      font-size: 0.95rem;
-      color: var(--text-main);
-      margin-bottom: 1.2rem;
-      flex-grow: 1;
-    }
-
-    .card-links {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      font-size: 0.875rem;
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 6px;
-      transition: background-color 0.2s;
-    }
-
-    .btn-primary {
-      background-color: var(--accent-hover);
-      color: #ffffff;
-    }
-
-    .btn-primary:hover {
-      background-color: var(--accent-color);
-    }
-
-    .btn-secondary {
-      background-color: transparent;
-      color: var(--accent-color);
-      border: 1px solid var(--border-color);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--accent-color);
-      background-color: rgba(88, 166, 255, 0.1);
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 4rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border-color);
-      color: #8b949e;
-      font-size: 0.875rem;
-    }
-  </style>
+footer{padding:34px 0 54px;border-top:3px solid var(--ink);display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.card,.go,.shape{transition:none}dialog[open]{animation:none}}
+</style>
 </head>
 <body>
+<div class="wrap">
+  <header class="top">
+    <strong id="brand">Tu Nombre</strong>
+    <nav aria-label="Principal"><a href="#proyectos">Proyectos</a><a id="gh-link" href="https://github.com/" rel="noopener">GitHub</a></nav>
+  </header>
 
-  <div class="container">
-    <!-- Encabezado / Presentación -->
-    <header>
-      <h1>BatiProfe</h1>
-      <p>Desarrollo de Software & Proyectos Web</p>
-    </header>
-
-    <!-- Sección de Proyectos -->
-    <main>
-      <h2 class="section-title">Mis Proyectos</h2>
-      
-      <div class="projects-grid">
-
-        <!-- Proyecto 1: MiPrimerProyectoVercel -->
-        <article class="card">
-          <div>
-            <h3>MiPrimerProyectoVercel</h3>
-            <p>Proyecto inicial utilizando integración de Vercel y repositorios de GitHub.</p>
-          </div>
-          <div class="card-links">
-            <a href="https://github.com/BatiProfe/MiPrimerProyectoVercel" target="_blank" class="btn btn-secondary">Repositorio</a>
-            <!-- Reemplaza el '#' con el enlace desplegado en Vercel si corresponde -->
-            <a href="#" target="_blank" class="btn btn-primary">Ver Demo</a>
-          </div>
-        </article>
-
-        <!-- Proyecto 2: ver -->
-        <article class="card">
-          <div>
-            <h3>ver</h3>
-            <p>Repositorio de desarrollo web estático en HTML.</p>
-          </div>
-          <div class="card-links">
-            <a href="https://github.com/BatiProfe/ver" target="_blank" class="btn btn-secondary">Repositorio</a>
-            <a href="https://batiprofe.github.io/ver/" target="_blank" class="btn btn-primary">Ver Demo</a>
-          </div>
-        </article>
-
+  <section class="hero" aria-labelledby="titulo">
+    <div>
+      <span class="role" id="role">Docente de informática</span>
+      <h1 id="titulo">Aprende a programar y a diseñar jugando</h1>
+      <p id="bio">Aquí comparto los proyectos, ideas y prácticas que construyo para mis clases. Todo es abierto y se puede explorar.</p>
+      <a class="go" href="#proyectos">Ver proyectos</a>
+    </div>
+    <div class="win" aria-label="Ejemplo de código que dibuja una composición">
+      <div class="bar"><i></i><i></i><i></i><span>aula.js</span><button class="run" id="run" type="button">▶ Ejecutar</button></div>
+      <div class="panes">
+        <pre id="code" aria-hidden="true"></pre>
+        <div class="prev">
+          <svg id="prev" viewBox="0 0 260 230" aria-hidden="true">
+            <circle class="shape" cx="82" cy="92" r="38" fill="#FF5D73" stroke="#1E2A4A" stroke-width="3"/>
+            <rect class="shape" x="118" y="62" width="70" height="70" rx="8" fill="#7B61FF" stroke="#1E2A4A" stroke-width="3" transform="rotate(12 153 97)"/>
+            <polygon class="shape" points="120,184 160,118 200,184" fill="#FFE45E" stroke="#1E2A4A" stroke-width="3" stroke-linejoin="round"/>
+            <g class="shape">
+              <rect x="34" y="40" width="168" height="160" fill="none" stroke="#7B61FF" stroke-width="2" stroke-dasharray="6 5"/>
+              <rect x="29" y="35" width="10" height="10" fill="#fff" stroke="#7B61FF" stroke-width="2"/>
+              <rect x="197" y="35" width="10" height="10" fill="#fff" stroke="#7B61FF" stroke-width="2"/>
+              <rect x="29" y="195" width="10" height="10" fill="#fff" stroke="#7B61FF" stroke-width="2"/>
+              <rect x="197" y="195" width="10" height="10" fill="#fff" stroke="#7B61FF" stroke-width="2"/>
+              <path d="M214 170l0 30 8-8 8 14 6-3-8-14 11-1z" fill="#1E2A4A" stroke="#fff" stroke-width="1.5"/>
+            </g>
+          </svg>
+        </div>
       </div>
-    </main>
+    </div>
+  </section>
+</div>
 
-    <!-- Pie de página -->
-    <footer>
-      <p>&copy; 2026 BatiProfe - Publicado con GitHub Pages</p>
-    </footer>
+<main class="wrap">
+  <section class="explore" id="proyectos" aria-labelledby="explorar">
+    <div class="head">
+      <h2 id="explorar">Proyectos</h2>
+      <p class="tip"><b>Tip del profe:</b> toca una tarjeta para ver el detalle y el código en GitHub.</p>
+    </div>
+    <p class="notice" id="notice" hidden></p>
+    <div class="controls">
+      <div class="tabs" id="tabs" role="group" aria-label="Filtrar por estado"></div>
+      <input id="q" type="search" placeholder="Buscar proyecto" aria-label="Buscar proyecto">
+    </div>
+    <div class="grid" id="grid" aria-live="polite"></div>
+  </section>
+
+  <footer>
+    <span>Hecho con HTML, CSS y JavaScript, sin frameworks, para que se pueda leer y aprender de él.</span>
+    <a id="foot-gh" href="https://github.com/" rel="noopener">Ver perfil en GitHub</a>
+  </footer>
+</main>
+
+<dialog id="detail" aria-labelledby="d-title">
+  <div class="bar"><i></i><i></i><i></i><span id="d-file"></span><button class="close" id="close" type="button">Cerrar</button></div>
+  <div class="art" id="d-art"></div>
+  <div class="body">
+    <span class="badge" id="d-badge"></span>
+    <h3 id="d-title"></h3>
+    <p id="d-desc"></p>
+    <ul class="topics" id="d-topics"></ul>
+    <dl id="d-stats"></dl>
+    <div class="btns" id="d-btns"></div>
   </div>
+</dialog>
 
+<script>
+/* ============ CONFIGURACIÓN: edita solo este bloque ============ */
+const CONFIG = {
+  username: "tu-usuario",     // tu usuario de GitHub
+  name: "Tu Nombre",
+  role: "Docente de informática",
+  title: "Aprende a programar y a diseñar jugando",
+  bio: "Aquí comparto los proyectos, ideas y prácticas que construyo para mis clases. Todo es abierto y se puede explorar.",
+  hideForks: true,
+  exclude: []                 // repos a ocultar, p. ej. ["borrador"]
+};
+/* Estado de cada proyecto según los topics del repositorio en GitHub:
+   topic "idea" -> Idea · topic "wip" -> En construcción · sin topic -> Publicado */
+/* ================================================================ */
+
+const COLORS = {JavaScript:"#f1e05a",TypeScript:"#3178c6",Python:"#3572A5",HTML:"#e34c26",CSS:"#7a5bd0",Java:"#b07219","C#":"#178600",Go:"#00ADD8",Rust:"#dea584",PHP:"#7a86b8",Shell:"#89e051",Vue:"#41b883",Dart:"#00B4AB",Kotlin:"#A97BFF",Swift:"#F05138","C++":"#f34b7d",Otro:"#8a94a6"};
+const EXT = {Python:"py",JavaScript:"js",TypeScript:"ts",HTML:"html",CSS:"css",Java:"java","C#":"cs",Go:"go",Rust:"rs",PHP:"php",Shell:"sh",Vue:"vue",Dart:"dart",Kotlin:"kt",Swift:"swift","C++":"cpp"};
+const color = l => COLORS[l] || COLORS.Otro;
+const file = r => r.name + "." + (EXT[r.language] || "md");
+const $ = s => document.querySelector(s);
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const LABEL = {pub:"Publicado", wip:"En construcción", idea:"Idea"};
+const stage = r => r.topics.includes("idea") ? "idea" : r.topics.includes("wip") ? "wip" : "pub";
+
+const DEMO = [
+  ["clima-cli","Consulta el clima desde la terminal con pronóstico de 5 días.","Python",42,["cli","api"],"2026-09-20"],
+  ["notas-ia","Cuaderno de notas con resúmenes automáticos mediante IA.","Python",8,["ia","wip"],"2026-10-18"],
+  ["recetario","Aplicación móvil para guardar y planear las comidas de la semana.","Dart",0,["flutter","idea"],"2026-10-21"],
+  ["gastos-app","Controla tus gastos con gráficos mensuales y exportación a CSV.","JavaScript",67,["pwa","finanzas"],"2026-08-14"]
+].map(([name,description,language,stargazers_count,topics,pushed_at])=>({
+  name,description,language,stargazers_count,topics,pushed_at,homepage:"",
+  html_url:"https://github.com/"+CONFIG.username+"/"+name
+}));
+
+let repos = [], f = {q:"", stage:""};
+
+/* ---------- Datos ---------- */
+async function load(){
+  $("#brand").textContent = CONFIG.name;
+  $("#role").textContent = CONFIG.role;
+  $("#titulo").textContent = CONFIG.title;
+  $("#bio").textContent = CONFIG.bio;
+  document.title = "Portafolio · " + CONFIG.name;
+  const gh = "https://github.com/" + CONFIG.username;
+  $("#gh-link").href = gh; $("#foot-gh").href = gh;
+  let demo = CONFIG.username === "tu-usuario";
+  if(!demo){
+    try{
+      const res = await fetch(`https://api.github.com/users/${CONFIG.username}/repos?per_page=100&sort=pushed`);
+      if(!res.ok) throw new Error(res.status);
+      const skip = [...CONFIG.exclude, CONFIG.username.toLowerCase()+".github.io"];
+      repos = (await res.json()).filter(r => !(CONFIG.hideForks && r.fork) && !skip.includes(r.name.toLowerCase()));
+      if(!repos.length) demo = true;
+    }catch(e){ demo = true; }
+  }
+  if(demo){
+    repos = DEMO;
+    const n = $("#notice"); n.hidden = false;
+    n.innerHTML = "Estás viendo proyectos de ejemplo. Cambia <code>username</code> en <code>CONFIG</code> para cargar tus repositorios.";
+  }
+  repos.forEach(r => { r.language = r.language || "Otro"; r.topics = r.topics || []; });
+  render();
+}
+
+/* ---------- Portadas generativas: formas + caja de selección de herramienta de diseño ---------- */
+function hash(s){let h=2166136261;for(const c of s){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0}
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function cover(r){
+  const R = rng(hash(r.name)), P = ["#FF5D73","#7B61FF","#FFE45E","#19B5A5",color(r.language)];
+  const bg = ["#F7FAFF","#FFF0F2","#EEEAFF","#FFFBDC"][Math.floor(R()*4)];
+  let s = `<rect width="400" height="250" fill="${bg}"/>`;
+  const n = 3 + Math.floor(R()*3);
+  let box = null;
+  for(let i=0;i<n;i++){
+    const c = P[Math.floor(R()*P.length)], x = 60+R()*280, y = 50+R()*150, k = 28 + R()*55, t = Math.floor(R()*3);
+    const st = `fill="${c}" stroke="#1E2A4A" stroke-width="3"`;
+    if(i === 0) box = [x-k, y-k, 2*k];
+    s += t==0 ? `<circle cx="${x}" cy="${y}" r="${k}" ${st}/>`
+        : t==1 ? `<rect x="${x-k}" y="${y-k}" width="${k*1.7}" height="${k*1.7}" rx="8" transform="rotate(${R()*50-25} ${x} ${y})" ${st}/>`
+        : `<polygon points="${x-k},${y+k} ${x},${y-k} ${x+k},${y+k}" stroke-linejoin="round" ${st}/>`;
+  }
+  const [bx,by,bw] = box, h = [[bx,by],[bx+bw,by],[bx,by+bw],[bx+bw,by+bw]]
+    .map(([a,b]) => `<rect x="${a-5}" y="${b-5}" width="10" height="10" fill="#fff" stroke="#7B61FF" stroke-width="2"/>`).join("");
+  s += `<rect x="${bx}" y="${by}" width="${bw}" height="${bw}" fill="none" stroke="#7B61FF" stroke-width="2" stroke-dasharray="6 5"/>${h}`;
+  return `<svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${s}</svg>`;
+}
+
+/* ---------- Lista ---------- */
+const matches = r => {
+  const q = f.q.toLowerCase();
+  return (!f.stage || stage(r) === f.stage) &&
+    (!q || (r.name+" "+(r.description||"")+" "+r.topics.join(" ")).toLowerCase().includes(q));
+};
+const fmtDate = s => new Date(s).toLocaleDateString("es", {month:"short", year:"numeric"});
+const el = (tag, cls, txt) => { const e = document.createElement(tag); if(cls) e.className = cls; if(txt != null) e.textContent = txt; return e; };
+const dots = () => { const d = document.createDocumentFragment(); for(let i=0;i<3;i++) d.append(document.createElement("i")); return d; };
+
+function render(){
+  const counts = {pub:0, wip:0, idea:0};
+  repos.forEach(r => counts[stage(r)]++);
+  const tabs = $("#tabs"); tabs.textContent = "";
+  [["","Todos",repos.length],["pub","Publicados",counts.pub],["wip","En construcción",counts.wip],["idea","Ideas",counts.idea]]
+    .filter(([v,,n]) => v === "" || n > 0)
+    .forEach(([v,l,n]) => {
+      const b = el("button","tab",`${l} (${n})`); b.type = "button";
+      b.setAttribute("aria-pressed", String(f.stage === v));
+      b.onclick = () => { f.stage = v; render(); };
+      tabs.append(b);
+    });
+  const out = repos.filter(matches).sort((a,b) => new Date(b.pushed_at) - new Date(a.pushed_at));
+  const grid = $("#grid"); grid.textContent = "";
+  if(!out.length) grid.append(el("p","empty","Ningún proyecto coincide. Prueba con otro término o cambia el estado."));
+  out.forEach(r => {
+    const c = el("button","card"); c.type = "button";
+    const bar = el("div","bar"); bar.append(dots(), el("span","",file(r)));
+    const art = el("div","art"); art.innerHTML = cover(r);
+    const info = el("div","info");
+    const meta = el("div","meta");
+    const lang = el("span"); const d = el("span","dot"); d.style.background = color(r.language);
+    lang.append(d, r.language);
+    meta.append(lang, el("span","","★ " + r.stargazers_count), el("span","",fmtDate(r.pushed_at)));
+    info.append(el("span","badge "+stage(r), LABEL[stage(r)]), el("h3","",r.name), el("p","", r.description || "Sin descripción todavía."), meta);
+    c.append(bar, art, info);
+    c.onclick = () => openDetail(r);
+    grid.append(c);
+  });
+}
+$("#q").oninput = e => { f.q = e.target.value; render(); };
+
+/* ---------- Detalle ---------- */
+const dlg = $("#detail");
+function openDetail(r){
+  const st = stage(r);
+  $("#d-file").textContent = file(r);
+  $("#d-art").innerHTML = cover(r);
+  const b = $("#d-badge"); b.textContent = LABEL[st]; b.className = "badge " + st;
+  $("#d-title").textContent = r.name;
+  $("#d-desc").textContent = r.description || "Este repositorio aún no tiene descripción.";
+  const t = $("#d-topics"); t.textContent = "";
+  r.topics.filter(x => x !== "idea" && x !== "wip").forEach(x => t.append(el("li","",x)));
+  const s = $("#d-stats"); s.textContent = "";
+  [["Lenguaje",r.language],["Estrellas",r.stargazers_count],["Actualizado",fmtDate(r.pushed_at)]]
+    .forEach(([k,v]) => s.append(el("dt","",k), el("dd","",v)));
+  const bt = $("#d-btns"); bt.textContent = "";
+  const link = (txt, href, cls) => { const a = el("a","btn "+cls,txt); a.href = href; a.target = "_blank"; a.rel = "noopener"; bt.append(a); };
+  link("Ver código en GitHub", r.html_url, "primary");
+  if(r.homepage) link("Ver demo", r.homepage, "");
+  dlg.showModal();
+}
+$("#close").onclick = () => dlg.close();
+dlg.addEventListener("click", e => { if(e.target === dlg) dlg.close(); });
+
+/* ---------- Hero: el código se escribe y dibuja la composición ---------- */
+const CODE = [
+  [["const ","k"],["aula","v"],[" = {",""]],
+  [["  tema: ",""],["\"programación\"","s"],[",",""]],
+  [["  estilo: ",""],["\"creativo\"","s"],[",",""]],
+  [["  humor: ",""],["true","k"],[",",""]],
+  [["};",""]],
+  [["dibujar","f"],["(aula);",""]]
+];
+const REVEAL = {1:0, 2:1, 3:2, 5:3};
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+let runId = 0;
+async function play(){
+  const id = ++runId, code = $("#code"), shapes = [...document.querySelectorAll("#prev .shape")];
+  code.textContent = ""; shapes.forEach(s => s.classList.remove("on"));
+  for(let i=0;i<CODE.length;i++){
+    const ln = el("span","ln"); code.append(ln);
+    for(const [t,c] of CODE[i]){
+      const sp = el("span", c); ln.append(sp);
+      for(const ch of t){ sp.textContent += ch; if(!reduce) await sleep(26); if(id !== runId) return; }
+    }
+    code.append("\n");
+    if(i in REVEAL) shapes[REVEAL[i]].classList.add("on");
+    if(!reduce) await sleep(260);
+    if(id !== runId) return;
+  }
+}
+$("#run").onclick = play;
+
+load();
+play();
+</script>
 </body>
 </html>
